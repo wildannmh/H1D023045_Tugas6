@@ -1,16 +1,40 @@
-# h1d023045_tugas6
+<h1>Nama: Wildan Munawwar Habib<br>
+NIM: H1D023045</h1>
 
-A new Flutter project.
+Penjelasan proses passing data dari form menuju tampilan
 
-## Getting Started
+1. Model data
+   - Di `lib/ui/form_data.dart` dibuat kelas model sederhana `PersonData`:
+     - Attributes: `nama` (String), `nim` (String), `tahunLahir` (int)
+     - Kelas ini merepresentasikan data yang dimasukkan pengguna.
 
-This project is a starting point for a Flutter application.
+2. Pengisian dan validasi form
+   - Halaman form (`FormDataPage`) menggunakan `Form` dengan beberapa `TextFormField`.
+   - Saat tombol "Tampilkan Data" ditekan, form divalidasi.
+   - Jika valid, dibuat instance `PersonData`:
+     ```
+     final data = PersonData(
+       nama: _namaCtl.text.trim(),
+       nim: _nimCtl.text.trim(),
+       tahunLahir: int.parse(_tahunCtl.text.trim()),
+     );
+     ```
 
-A few resources to get you started if this is your first Flutter project:
+3. Passing data ke halaman tampilan
+   - Data diteruskan ke halaman hasil (`TampilDataPage`) dengan mekanisme Navigator dan konstruktor:
+     ```
+     Navigator.of(context).push(
+       MaterialPageRoute(
+         builder: (context) => TampilDataPage(data: data),
+       ),
+     );
+     ```
+   - Di `TampilDataPage`, konstruktor menerima `PersonData data` dan menampilkannya di UI.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Ringkasan alur
+   - Pengguna mengisi form -> dibuat instance `PersonData` -> Navigator push ke halaman hasil dengan `data` sebagai parameter -> halaman hasil membaca `data` dari konstruktor dan menampilkan.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h1>Screenshot</h1>
+<img width="440" height="1010" alt="image" src="https://github.com/user-attachments/assets/1091c370-5aa2-4f28-87b6-f7eec869cb05" />
+<img width="440" height="1014" alt="image" src="https://github.com/user-attachments/assets/a16e75d3-7d5d-48e4-a18b-f143542b5c32" />
+
